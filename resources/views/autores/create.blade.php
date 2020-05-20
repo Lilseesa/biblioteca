@@ -44,7 +44,7 @@
                 <label class="custom-file-label" for="customFile">@lang('Elija su avatar')</label>
             </div>
         
-            <button type="submit" class="btn btn-primary">@lang('Insertar libro')</button>
+            <button type="submit" class="btn btn-primary">@lang('Insertar autor')</button>
         </form>   
     </div>
 

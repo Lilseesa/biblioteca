@@ -40,11 +40,11 @@ class LibrosController extends Controller
         if($request->hasFile('portada')){
             $file = $data['portada'];
 
-            $portada = time() . $file->getClientOriginalName();
+            $portada = time() . Str::kebab($file->getClientOriginalName());
 
             $file->storeAs('public/portadas', $portada);
 
-            $portada = 'storage/portadas' . $portada;
+            $portada = 'storage/portadas/' . $portada;
         }
 
         $data['portada'] = $portada;

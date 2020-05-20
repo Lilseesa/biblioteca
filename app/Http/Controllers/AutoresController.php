@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Autor;
+use App\Http\Requests\CrearAutorRequest;
+use Illuminate\Support\Str;
 
 class AutoresController extends Controller
 {
@@ -27,19 +29,21 @@ class AutoresController extends Controller
 
     /**
      * Se encarga de insertar el libro en la BD
-     * @var App\Http\Requests\CrearLibroRequest $request
+     * @var App\Http\Requests\CrearAutorRequest $request
      * @return response
      */
     public function store(CrearAutorRequest $request){
 
         $data = $request->validated();
 
+        //dd($data);
+        
         $avatar = 'storage/avatares/notFound.png';
 
         if($request->hasFile('avatar')){
             $file = $data['avatar'];
 
-            $avatar = time() . $file->getClientOriginalName();
+            $avatar = time() . Str::kebab($file->getClientOriginalName());
 
             $file->storeAs('public/avatares', $avatar);
 
@@ -54,12 +58,12 @@ class AutoresController extends Controller
             return redirect(route('autores.index'));
         }
 
-        dd($data);
+        
     }
 
     /**
      * Se encarga de insertar el libro en la BD
-     * @param Libro $libro
+     * @param Autor $autor
      * @return response
      */
 
@@ -80,17 +84,17 @@ class AutoresController extends Controller
 
     /**
      * Se encarga de modificar el libro en la BD
-     * @var App\Http\Requests\CrearLibroRequest $request
+     * @var App\Http\Requests\CrearAutorRequest $request
      * @return response
      */
 
-    public function update(CrearLibroRequest $request){
+    public function update(CrearAutorRequest $request){
 
     }
 
     /**
      * Se encarga de eliminar el libro en la BD
-     * @param Libro $libro
+     * @param Autor $autor
      * @return response
      */
 

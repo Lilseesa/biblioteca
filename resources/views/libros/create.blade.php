@@ -36,7 +36,7 @@
 
             <div class="custom-file mb-5">
                 <input type="file" class="custom-file-input" id="portada" name="portada">
-                <label class="custom-file-label" for="customFile">@lang('Elija la portada')</label>
+                <label class="custom-file-label" for="portada">@lang('Elija la portada')</label>
             </div>
         
             <button type="submit" class="btn btn-primary">@lang('Insertar libro')</button>

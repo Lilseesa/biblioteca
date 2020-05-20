@@ -12,7 +12,7 @@
             @foreach ($libros as $libro)
                 <div class="col-4">
                     <div class="card">
-                        <img src=" url({{$libro->portada}})" class="card-img-top" alt="{{$libro->titulo}}">
+                        <img src="{{url($libro->portada)}}" class="card-img-top" alt="{{$libro->titulo}}">
                         
                         <div class="card-body">
                             <h5 class="card-title">{{$libro->titulo}}</h5>

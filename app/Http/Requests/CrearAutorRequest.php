@@ -27,8 +27,8 @@ class CrearAutorRequest extends FormRequest
             'nombre' => 'required',
             'apellidos' => 'required',
             'biografia' => 'required',
-            'pais' => 'pais',
-            'avatar' => 'required|image|mimes:jpeg,png'
+            'pais' => 'required',
+            'avatar' => 'required|image|mimes:jpeg,jpg,png',
         ];
     }
 }

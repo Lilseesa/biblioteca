@@ -8,7 +8,7 @@
 
         <h2>{{$libro->titulo}}</h2>
         
-        <img src="url({{$libro->portada}})" class="card-img-top" alt="{{$libro->titulo}}">
+        <img src="{{url($libro->portada)}}" class="card-img-top" alt="{{$libro->titulo}}">
 
         <p>{{$libro->resumen}}</p>
 
