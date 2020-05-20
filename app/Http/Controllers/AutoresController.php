@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Libro;
-use App\Http\Requests\CrearLibroRequest;
+use Illuminate\Http\Request;
 
-class LibrosController extends Controller
+class AutoresController extends Controller
 {
     /**
      * Muestra todos los libros
      * @return response
      */
     public function index(){
-        $libros = Libro::all();
-        return view('Libros.index', [
-            'libros' => $libros,
+        $autores = Autor::all();
+        return view('Autores.index', [
+            'autores' => $autores,
         ]);
     }
 
@@ -23,7 +22,7 @@ class LibrosController extends Controller
      * @return response
      */
     public function create(){
-        return view('Libros.create');
+        return view('Autores.create');
     }
 
     /**
@@ -31,28 +30,28 @@ class LibrosController extends Controller
      * @var App\Http\Requests\CrearLibroRequest $request
      * @return response
      */
-    public function store(CrearLibroRequest $request){
+    public function store(CrearAutorRequest $request){
 
         $data = $request->validated();
 
-        $portada = 'storage/portadas/notFound.png';
+        $avatar = 'storage/avatares/notFound.png';
 
-        if($request->hasFile('portada')){
-            $file = $data['portada'];
+        if($request->hasFile('avatar')){
+            $file = $data['avatar'];
 
-            $portada = time() . $file->getClientOriginalName();
+            $avatar = time() . $file->getClientOriginalName();
 
-            $file->storeAs('public/portadas', $portada);
+            $file->storeAs('public/avatares', $avatar);
 
-            $portada = 'storage/portadas' . $portada;
+            $avatar = 'storage/avatares' . $avatar;
         }
 
-        $data['portada'] = $portada;
+        $data['avatar'] = $avatar;
 
-        $libro = Libro::create($data);
+        $autor = Autor::create($data);
 
-        if($libro){
-            return redirect(route('libros.index'));
+        if($autor){
+            return redirect(route('autores.index'));
         }
 
         dd($data);
@@ -64,9 +63,9 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function show(Libro $libro){
-        return view('libros.show', [
-            'libro' => $libro
+    public function show(Autor $autor){
+        return view('autores.show', [
+            'autor' => $autor
         ]);
     }
 
@@ -75,7 +74,7 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function edit(Libro $libro){
+    public function edit(Autor $autor){
         
     }
 
@@ -95,7 +94,7 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function delete(Libro $libro){
+    public function delete(Autor $autor){
 
     }
 }

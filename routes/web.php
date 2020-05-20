@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// rutas paara libros
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/Libros', 'LibrosController@index')->name('libros.index');
@@ -29,4 +30,11 @@ Route::get('/Libros/{libro}/edit', 'LibrosController@edit')->name('libros.edit')
 Route::put('/Libros/update', 'LibrosController@update')->name('libros.update');
 
 Route::get('/Libros/{libro}}', 'LibrosController@show')->name('libros.show');
-Route::delete('/Libros/{libro}}', 'LibrosController@delete')->name('libros.delete');
+Route::delete('/Libros/{libro}}', 'LibrosController@destory')->name('libros.destory');
+
+//rutas ppara autores 
+Route::get('/Autores/create', 'AutoresController@create')->name('autores.create');
+
+Route::resource('autores', 'AutoresController')->parameters([
+    'autores' => 'autor'
+]);
