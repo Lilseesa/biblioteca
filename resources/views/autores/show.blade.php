@@ -6,7 +6,7 @@
 
         <a href="{{route('autores.index')}}">Autores</a>
 
-        <h2>{{$autor->nombre}} {{$autor->apellidos}}</h2>
+        <h2>{{$autor->Nombre}} {{$autor->apellidos}}</h2>
         
         <img src="{{url($autor->avatar)}}" class="card-img-top" alt="{{$autor->nombre}}">
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Autor;
 use App\Http\Requests\CrearAutorRequest;
+use App\Http\Requests\AutorRequest;
 use Illuminate\Support\Str;
 
 class AutoresController extends Controller
@@ -45,9 +46,9 @@ class AutoresController extends Controller
 
             $avatar = time() . Str::kebab($file->getClientOriginalName());
 
-            $file->storeAs('public/avatares', $avatar);
+            $file->storeAs('public/avatares/', $avatar);
 
-            $avatar = 'storage/avatares' . $avatar;
+            $avatar = 'storage/avatares/' . $avatar;
         }
 
         $data['avatar'] = $avatar;
@@ -57,8 +58,6 @@ class AutoresController extends Controller
         if($autor){
             return redirect(route('autores.index'));
         }
-
-        
     }
 
     /**
@@ -68,7 +67,7 @@ class AutoresController extends Controller
      */
 
     public function show(Autor $autor){
-        return view('autores.show', [
+        return view('Autores.show', [
             'autor' => $autor
         ]);
     }
@@ -79,17 +78,39 @@ class AutoresController extends Controller
      */
 
     public function edit(Autor $autor){
-        
+        return view('Autores.edit', [
+            'autor' => $autor
+        ]);
     }
 
     /**
-     * Se encarga de modificar el libro en la BD
-     * @var App\Http\Requests\CrearAutorRequest $request
+     * Se encarga de modificar el autor en la BD
+     * @var App\Http\Requests\AutorRequest $request
      * @return response
      */
 
-    public function update(CrearAutorRequest $request){
+    public function update(AutorRequest $request,  Autor $autor){
+        $data = $request->validated();
 
+        $avatar = $autor->avatar;
+
+        if($request->hasFile('avatar')){
+            $file = $data['avatar'];
+
+            $avatar = time() . Str::kebab($file->getClientOriginalName());
+
+            $file->storeAs('public/avatares/', $avatar);
+
+            $avatar = 'storage/avatares/' . $avatar;
+        }
+
+        $data['avatar'] = $avatar;
+
+        if($autor->update($data)){
+            return redirect(route('autores.index'));
+        }
+
+        dd($data);
     }
 
     /**
@@ -98,7 +119,7 @@ class AutoresController extends Controller
      * @return response
      */
 
-    public function delete(Autor $autor){
+    public function destroy(Autor $autor){
 
     }
 }

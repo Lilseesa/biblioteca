@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h2>{{__('Insertar libro')}}</h2>   
+        <h2>@lang('Editar autor')</h2>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -15,12 +15,12 @@
             </div>
         @endif
 
-        <x-libro-form 
-        method="POST" 
-        action="{{ route('libros.store') }}"
-        btnText="{{ __('Insertar libro') }}"
-        :libro="null"
-        ></x-libro-form>
+        <x-autor-form
+            method="PUT"
+            action="{{ route('autores.update', $autor) }}"
+            btnText="{{ __('Actualizar autor') }}"
+            :autor="$autor"
+        ></x-autor-form>
 
     </div>
 

@@ -27,14 +27,16 @@ Route::get('/Libros/create', 'LibrosController@create')->name('libros.create');
 Route::post('/Libros/store', 'LibrosController@store')->name('libros.store');
 
 Route::get('/Libros/{libro}/edit', 'LibrosController@edit')->name('libros.edit');
-Route::put('/Libros/update', 'LibrosController@update')->name('libros.update');
+Route::put('/Libros/update/{libro}', 'LibrosController@update')->name('libros.update');
 
 Route::get('/Libros/{libro}}', 'LibrosController@show')->name('libros.show');
-Route::delete('/Libros/{libro}}', 'LibrosController@destory')->name('libros.destory');
+Route::delete('/Libros/{libro}', 'LibrosController@delete')->name('libros.delete');
 
 //rutas ppara autores 
-Route::get('/Autores/create', 'AutoresController@create')->name('autores.create');
 
 Route::resource('autores', 'AutoresController')->parameters([
     'autores' => 'autor'
 ]);
+
+// rutas para genero
+Route::resource('generos', 'GeneroController');

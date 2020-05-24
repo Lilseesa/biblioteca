@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Libro;
 use App\Http\Requests\CrearLibroRequest;
+use App\Http\Requests\LibroRequest;
+use Illuminate\Support\Str;
 
 class LibrosController extends Controller
 {
@@ -42,7 +44,7 @@ class LibrosController extends Controller
 
             $portada = time() . Str::kebab($file->getClientOriginalName());
 
-            $file->storeAs('public/portadas', $portada);
+            $file->storeAs('public/portadas/', $portada);
 
             $portada = 'storage/portadas/' . $portada;
         }
@@ -76,17 +78,39 @@ class LibrosController extends Controller
      */
 
     public function edit(Libro $libro){
-        
+        return view('libros.edit', [
+            'libro' => $libro
+        ]);
     }
 
     /**
      * Se encarga de modificar el libro en la BD
-     * @var App\Http\Requests\CrearLibroRequest $request
+     * @var App\Http\Requests\LibroRequest $request
      * @return response
      */
 
-    public function update(CrearLibroRequest $request){
+    public function update(LibroRequest $request, Libro $libro){
+        $data = $request->validated();
 
+        $portada = $libro->portada;
+
+        if ($request->hasFile('portada')) {
+            $file = $data['portada'];
+
+            $portada = time() . Str::kebab($file->getClientOriginalName());
+
+            $file->storeAs('public/portadas', $portada);
+
+            $portada = 'storage/portadas/' .  $portada;
+        }
+
+        $data['portada'] = $portada;
+
+        if ($libro->update($data)) {
+            return redirect(route('libros.index'));
+        }
+
+        dd($data);
     }
 
     /**
@@ -96,6 +120,6 @@ class LibrosController extends Controller
      */
 
     public function delete(Libro $libro){
-
+        
     }
 }
