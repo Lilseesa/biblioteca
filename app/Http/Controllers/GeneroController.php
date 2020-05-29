@@ -102,6 +102,9 @@ class GeneroController extends Controller
      */
     public function destroy(Genero $genero)
     {
-        //
+        if($genero->delete()){
+            return response()->json(['error' => false],202);    
+        }
+        return response()->json(['error' => true],202);
     }
 }

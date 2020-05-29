@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('index');
 
 Auth::routes();
 
@@ -29,14 +27,15 @@ Route::post('/Libros/store', 'LibrosController@store')->name('libros.store');
 Route::get('/Libros/{libro}/edit', 'LibrosController@edit')->name('libros.edit');
 Route::put('/Libros/update/{libro}', 'LibrosController@update')->name('libros.update');
 
-Route::get('/Libros/{libro}}', 'LibrosController@show')->name('libros.show');
-Route::delete('/Libros/{libro}', 'LibrosController@delete')->name('libros.delete');
+Route::get('/Libros/{libro}', 'LibrosController@show')->name('libros.show');
+Route::delete('/Libros/{libro}', 'LibrosController@destroy')->name('libros.destroy');
 
 //rutas ppara autores 
+//resource usa todos los metodos creados por defecto, o sea, crea las rutas solo
 
 Route::resource('autores', 'AutoresController')->parameters([
     'autores' => 'autor'
 ]);
 
-// rutas para genero
+// rutas para genero 
 Route::resource('generos', 'GeneroController');

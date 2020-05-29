@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Libro;
+use App\Autor;
+use App\Genero;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $libros = Libro::orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+        $autores = Autor::orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+        $generos = Genero::orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+        return view('home', [
+            'libros' => $libros,
+            'autores' => $autores,
+            'generos' => $generos,
+        ]);
     }
 }

@@ -10,7 +10,7 @@
 
         <div class="btn-group" role="group" >
             <a href="{{ route('generos.edit', $genero) }}" type="button" class="btn btn-success">Editar</a>
-            <button type="button" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-danger btn-eliminarGen" data-id="{{ $genero->id }}">Eliminar</button>
         </div>
 
     </div>

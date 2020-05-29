@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Genero extends Migration
+class AddNombreToGenerosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class Genero extends Migration
      */
     public function up()
     {
-        Schema::create('generos', function (Blueprint $table) {
-            $table->id();
-
+        Schema::table('generos', function (Blueprint $table) {
             $table->string('nombre');
-
-            $table->timestamps();
         });
     }
 
@@ -29,6 +25,8 @@ class Genero extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generos');
+        Schema::table('generos', function (Blueprint $table) {
+            //
+        });
     }
 }

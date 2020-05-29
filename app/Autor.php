@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Autor extends Model
 {
+
+    use SoftDeletes;
 
     public $table = "autores";
 
@@ -22,4 +25,9 @@ class Autor extends Model
         'pais',
         'avatar'
     ];
+
+    public function libros()
+    {
+        return $this->belongToMany('App\Libro');
+    }
 }

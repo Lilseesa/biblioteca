@@ -56,3 +56,4 @@ class GeneroForm extends Component
         return view('components.genero-form');
     }
 }
+

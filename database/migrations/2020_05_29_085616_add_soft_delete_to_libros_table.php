@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFeaturesToGeneros extends Migration
+class AddSoftDeleteToLibrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFeaturesToGeneros extends Migration
      */
     public function up()
     {
-        Schema::table('generos', function (Blueprint $table) {
-            //
+        Schema::table('libros', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +25,8 @@ class AddFeaturesToGeneros extends Migration
      */
     public function down()
     {
-        Schema::table('generos', function (Blueprint $table) {
-            //
+        Schema::table('libros', function (Blueprint $table) {
+            $table->dropSoftDeletes();
         });
     }
 }

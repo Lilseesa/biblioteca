@@ -37218,70 +37218,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/adminAutores.js":
-/*!**************************************!*\
-  !*** ./resources/js/adminAutores.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function deleteAutor(e) {
-  var id = e.target.dataset.id;
-
-  if (!id) {
-    return;
-  }
-
-  window.axios["delete"]("/autores/".concat(id)).then(function (res) {
-    if (!res.data.error) {
-      window.location.href = '/autores';
-    } else {
-      alert('No se pudo eliminar');
-    }
-  })["catch"](function (err) {
-    return console.log(err);
-  });
-}
-
-var btnsEliminar = document.querySelectorAll(".btn-eliminarAut");
-btnsEliminar.forEach(function (btn) {
-  btn.addEventListener("click", deleteAutor);
-});
-
-/***/ }),
-
-/***/ "./resources/js/adminGeneros.js":
-/*!**************************************!*\
-  !*** ./resources/js/adminGeneros.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function deleteGenero(e) {
-  var id = e.target.dataset.id;
-
-  if (!id) {
-    return;
-  }
-
-  window.axios["delete"]("/generos/".concat(id)).then(function (res) {
-    if (!res.data.error) {
-      window.location.href = '/generos';
-    } else {
-      alert('No se pudo eliminar');
-    }
-  })["catch"](function (err) {
-    return console.log(err);
-  });
-}
-
-var btnsEliminar = document.querySelectorAll(".btn-eliminarGen");
-btnsEliminar.forEach(function (btn) {
-  btn.addEventListener("click", deleteGenero);
-});
-
-/***/ }),
-
 /***/ "./resources/js/adminLibros.js":
 /*!*************************************!*\
   !*** ./resources/js/adminLibros.js ***!
@@ -37296,12 +37232,8 @@ function deleteLibro(e) {
     return;
   }
 
-  window.axios["delete"]("/Libros/".concat(id)).then(function (res) {
-    if (!res.data.error) {
-      window.location.href = '/Libros';
-    } else {
-      alert('No se pudo eliminar');
-    }
+  window.axios["delete"]("/libros/".concat(id)).then(function (res) {
+    console.log(res);
   })["catch"](function (err) {
     return console.log(err);
   });
@@ -37383,16 +37315,14 @@ window.axios.defaults.baseURL = "http://interactivas2.test/";
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/js/adminLibros.js ./resources/js/adminAutores.js ./resources/js/adminGeneros.js ./resources/sass/app.scss ***!
-  \*********************************************************************************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/js/adminLibros.js ./resources/sass/app.scss ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\laragon\www\interactivas2\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! D:\laragon\www\interactivas2\resources\js\adminLibros.js */"./resources/js/adminLibros.js");
-__webpack_require__(/*! D:\laragon\www\interactivas2\resources\js\adminAutores.js */"./resources/js/adminAutores.js");
-__webpack_require__(/*! D:\laragon\www\interactivas2\resources\js\adminGeneros.js */"./resources/js/adminGeneros.js");
 module.exports = __webpack_require__(/*! D:\laragon\www\interactivas2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 

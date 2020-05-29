@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Autor;
-use App\Http\Requests\CrearAutorRequest;
 use App\Http\Requests\AutorRequest;
 use Illuminate\Support\Str;
 
@@ -30,10 +29,10 @@ class AutoresController extends Controller
 
     /**
      * Se encarga de insertar el libro en la BD
-     * @var App\Http\Requests\CrearAutorRequest $request
+     * @var App\Http\Requests\AutorRequest $request
      * @return response
      */
-    public function store(CrearAutorRequest $request){
+    public function store(AutorRequest $request){
 
         $data = $request->validated();
 
@@ -120,6 +119,9 @@ class AutoresController extends Controller
      */
 
     public function destroy(Autor $autor){
-
+        if($autor->delete()){
+            return response()->json(['error' => false],202);    
+        }
+        return response()->json(['error' => true],202);
     }
 }

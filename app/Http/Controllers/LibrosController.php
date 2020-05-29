@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Libro;
-use App\Http\Requests\CrearLibroRequest;
 use App\Http\Requests\LibroRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class LibrosController extends Controller
@@ -30,12 +30,14 @@ class LibrosController extends Controller
 
     /**
      * Se encarga de insertar el libro en la BD
-     * @var App\Http\Requests\CrearLibroRequest $request
+     * @var App\Http\Requests\LibroRequest $request
      * @return response
      */
-    public function store(CrearLibroRequest $request){
+    public function store(LibroRequest $request){
 
         $data = $request->validated();
+
+        $userId = Auth::user()->id;
 
         $portada = 'storage/portadas/notFound.png';
 
@@ -50,6 +52,10 @@ class LibrosController extends Controller
         }
 
         $data['portada'] = $portada;
+
+        $data['user_id'] = $userId;
+
+        
 
         $libro = Libro::create($data);
 
@@ -119,7 +125,11 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function delete(Libro $libro){
-        
+    public function destroy(Libro $libro)
+    {
+        if($libro->delete()){
+            return response()->json(['error' => false],202);    
+        }
+        return response()->json(['error' => true],202);
     }
 }
