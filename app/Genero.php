@@ -12,6 +12,6 @@ class Genero extends Model
 
     public function libros()
     {
-        return $this->belongToMany('App\Libro', 'genero_libro', 'genero_id', 'libro_id')->withTimeStamps();
+        return $this->belongToMany('App\Libro', 'genero_libro', 'genero_id', 'libro_id')->withTimestamps();
     }
 }

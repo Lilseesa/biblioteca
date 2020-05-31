@@ -28,6 +28,6 @@ class Autor extends Model
 
     public function libros()
     {
-        return $this->belongToMany('App\Libro', 'autor_libro', 'autor_id', 'libro_id')->withTimeStamps();
+        return $this->belongToMany('App\Libro', 'autor_libro', 'autor_id', 'libro_id')->withTimestamps();
     }
 }

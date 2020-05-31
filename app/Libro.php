@@ -24,12 +24,12 @@ class Libro extends Model
 
     public function autores()
     {
-        return $this->belongsToMany('App\Autor', 'autor_libro', 'autor_id', 'libro_id')->withTimeStamps();
+        return $this->belongsToMany('App\Autor', 'autor_libro', 'autor_id', 'libro_id')->withTimestamps();
     }
     
     public function generos()
     {
-        return $this->belongsToMany('App\Genero', 'genero_libro', 'genero_id', 'libro_id')->withTimeStamps();
+        return $this->belongsToMany('App\Genero', 'genero_libro', 'genero_id', 'libro_id')->withTimestamps();
     }
 
     public function user()
