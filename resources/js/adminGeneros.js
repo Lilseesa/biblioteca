@@ -17,7 +17,7 @@ function deleteGenero(e){
     .catch(err => console.log(err));
 }
 
-const btnsEliminar = document.querySelectorAll(".btn-eliminarGen");
+const btnsEliminar = document.querySelectorAll(".btn-eliminar-genero");
 
 btnsEliminar.forEach(btn => {
     btn.addEventListener("click", deleteGenero);

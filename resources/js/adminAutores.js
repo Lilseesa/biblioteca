@@ -17,7 +17,7 @@ function deleteAutor(e){
     .catch(err => console.log(err));
 }
 
-const btnsEliminar = document.querySelectorAll(".btn-eliminarAut");
+const btnsEliminar = document.querySelectorAll(".btn-eliminar-autor");
 
 btnsEliminar.forEach(btn => {
     btn.addEventListener("click", deleteAutor);

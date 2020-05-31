@@ -17,7 +17,7 @@ function deleteLibro(e){
     .catch(err => console.log(err));
 }
 
-const btnsEliminar = document.querySelectorAll(".btn-eliminar");
+const btnsEliminar = document.querySelectorAll(".btn-eliminar-libro");
 
 btnsEliminar.forEach(btn => {
     btn.addEventListener("click", deleteLibro);

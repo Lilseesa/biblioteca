@@ -37243,7 +37243,7 @@ function deleteAutor(e) {
   });
 }
 
-var btnsEliminar = document.querySelectorAll(".btn-eliminarAut");
+var btnsEliminar = document.querySelectorAll(".btn-eliminar-autor");
 btnsEliminar.forEach(function (btn) {
   btn.addEventListener("click", deleteAutor);
 });
@@ -37275,7 +37275,7 @@ function deleteGenero(e) {
   });
 }
 
-var btnsEliminar = document.querySelectorAll(".btn-eliminarGen");
+var btnsEliminar = document.querySelectorAll(".btn-eliminar-genero");
 btnsEliminar.forEach(function (btn) {
   btn.addEventListener("click", deleteGenero);
 });
@@ -37307,7 +37307,7 @@ function deleteLibro(e) {
   });
 }
 
-var btnsEliminar = document.querySelectorAll(".btn-eliminar");
+var btnsEliminar = document.querySelectorAll(".btn-eliminar-libro");
 btnsEliminar.forEach(function (btn) {
   btn.addEventListener("click", deleteLibro);
 });

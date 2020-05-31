@@ -8,6 +8,18 @@ use Illuminate\Support\Str;
 
 class AutoresController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware(
+            'auth', [
+                'except' => [
+                    'index',
+                    'show',
+                ]
+            ]
+        );
+    }
+    
     /**
      * Muestra todos los libros
      * @return response

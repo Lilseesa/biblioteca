@@ -14,7 +14,7 @@
 
         <div class="btn-group" role="group" >
             <a href="{{ route('libros.edit', $libro) }}" type="button" class="btn btn-success">Editar</a>
-            <button type="button" class="btn btn-danger btn-eliminar" data-id="{{ $libro->id }}">Eliminar</button>
+            <button type="button" class="btn btn-danger btn-eliminar-libro" data-id="{{ $libro->id }}">Eliminar</button>
         </div>
 
     </div>

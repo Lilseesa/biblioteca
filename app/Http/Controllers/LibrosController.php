@@ -9,6 +9,18 @@ use Illuminate\Support\Str;
 
 class LibrosController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware(
+            'auth', [
+                'except' => [
+                    'index',
+                    'show',
+                ]
+            ]
+        );
+    }
+
     /**
      * Muestra todos los libros
      * @return response
