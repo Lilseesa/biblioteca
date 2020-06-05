@@ -5,8 +5,10 @@
     <div class="container">
         <h2>@lang('Género')</h2>
 
-        <a href="{{route('generos.create')}}">Insertar genero</a>
-
+        @if(Auth::check() && Auth::user()->hasAnyRole(['admin']))
+            <a href="{{route('generos.create')}}">Insertar genero</a>
+        @endif
+        
         <div class="row">
 
             @foreach ($generos as $genero)

@@ -18,7 +18,7 @@ class CreateRoleUserTable extends Migration
             $table->bigInteger('role_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
 
-            $table->primary('role_id','user_id');
+            $table->primary(['role_id','user_id']);
 
             $table->foreign('role_id')
                 ->references('id')

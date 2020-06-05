@@ -5,8 +5,10 @@
     <div class="container">
         <h2>@lang('Aca van a ir todos los libros')</h2>
 
-        <a href="{{route('libros.create')}}">Insertar libro</a>
-        
+        @if(Auth::check() && Auth::user()->hasAnyRole(['admin']))
+            <a href="{{route('libros.create')}}">Insertar libro</a>
+        @endif
+
         <div class="row">
 
             @foreach ($libros as $libro)

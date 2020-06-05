@@ -4,19 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Genero;
 use App\Http\Requests\GeneroRequest;
+use Illuminate\Http\Request;
 
 class GeneroController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(
-            'auth', [
-                'except' => [
-                    'index',
-                    'show',
-                ]
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
             ]
-        );
+        ]);
+
+        $this->middleware('role:generos.index,admin', [
+            'except' => [
+                'index',
+                'show',
+            ]
+        ]);
     }
 
     /**
@@ -38,8 +44,10 @@ class GeneroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         return view('genero.create');
     }
 
@@ -51,6 +59,8 @@ class GeneroController extends Controller
      */
     public function store(GeneroRequest $request)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         $data = $request->validated();
 
         $genero = Genero::create($data);
@@ -81,8 +91,10 @@ class GeneroController extends Controller
      * @param  \App\Genero  $genero
      * @return \Illuminate\Http\Response
      */
-    public function edit(Genero $genero)
+    public function edit(Request $request, Genero $genero)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         return view('genero.edit', [
             'genero' => $genero
         ]);
@@ -97,6 +109,8 @@ class GeneroController extends Controller
      */
     public function update(GeneroRequest $request, Genero $genero)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         $data = $request->validated();
 
         if ($genero->update($data)) {
@@ -112,8 +126,10 @@ class GeneroController extends Controller
      * @param  \App\Genero  $genero
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Genero $genero)
+    public function destroy(Request $request, Genero $genero)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         if($genero->delete()){
             return response()->json(['error' => false],202);    
         }

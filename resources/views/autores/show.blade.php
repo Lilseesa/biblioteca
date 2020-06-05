@@ -12,10 +12,12 @@
 
         <p>{{$autor->biografia}}</p>
 
-        <div class="btn-group" role="group" >
-            <a href="{{ route('autores.edit', $autor) }}" type="button" class="btn btn-success">Editar</a>
-            <button type="button" class="btn btn-danger btn-eliminar-autor" data-id="{{ $autor->id }}">Eliminar</button>
-        </div>
-
+        @if(Auth::check() && Auth::user()->hasAnyRole(['admin']))
+            <div class="btn-group" role="group" >
+                <a href="{{ route('autores.edit', $autor) }}" type="button" class="btn btn-success">Editar</a>
+                <button type="button" class="btn btn-danger btn-eliminar-autor" data-id="{{ $autor->id }}">Eliminar</button>
+            </div>
+        @endif
+        
     </div>
 @endsection

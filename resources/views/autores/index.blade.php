@@ -5,7 +5,9 @@
     <div class="container">
         <h2>@lang('Autores registrados')</h2>
 
-        <a href="{{route('autores.create')}}">Registrar Autor</a>
+        @if(Auth::check() && Auth::user()->hasAnyRole(['admin']))
+            <a href="{{route('autores.create')}}">Registrar Autor</a>
+        @endif
         
         <div class="row">
 

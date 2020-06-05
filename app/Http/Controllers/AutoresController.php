@@ -5,19 +5,25 @@ namespace App\Http\Controllers;
 use App\Autor;
 use App\Http\Requests\AutorRequest;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class AutoresController extends Controller
 {
     
     public function __construct(){
-        $this->middleware(
-            'auth', [
-                'except' => [
-                    'index',
-                    'show',
-                ]
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
             ]
-        );
+        ]);
+
+        $this->middleware('role:autores.index,admin', [
+            'except' => [
+                'index',
+                'show',
+            ]
+        ]);
     }
     
     /**
@@ -35,7 +41,10 @@ class AutoresController extends Controller
      * Muestra el form de insertar
      * @return response
      */
-    public function create(){
+    public function create(Request $request)
+    {
+        //$request->user()->authorizeRoles(['admin']);
+
         return view('Autores.create');
     }
 
@@ -44,7 +53,9 @@ class AutoresController extends Controller
      * @var App\Http\Requests\AutorRequest $request
      * @return response
      */
-    public function store(AutorRequest $request){
+    public function store(AutorRequest $request)
+    {
+        //$request->user()->authorizeRoles(['admin']);
 
         $data = $request->validated();
 
@@ -88,7 +99,10 @@ class AutoresController extends Controller
      * @return response
      */
 
-    public function edit(Autor $autor){
+    public function edit(Request $request, Autor $autor)
+    {
+        //$request->user()->authorizeRoles(['admin']);
+
         return view('Autores.edit', [
             'autor' => $autor
         ]);
@@ -100,7 +114,10 @@ class AutoresController extends Controller
      * @return response
      */
 
-    public function update(AutorRequest $request,  Autor $autor){
+    public function update(AutorRequest $request,  Autor $autor)
+    {
+        //$request->user()->authorizeRoles(['admin']);
+
         $data = $request->validated();
 
         $avatar = $autor->avatar;
@@ -130,7 +147,10 @@ class AutoresController extends Controller
      * @return response
      */
 
-    public function destroy(Autor $autor){
+    public function destroy(Request $request, Autor $autor)
+    {
+        //$request->user()->authorizeRoles(['admin']);
+        
         if($autor->delete()){
             return response()->json(['error' => false],202);    
         }

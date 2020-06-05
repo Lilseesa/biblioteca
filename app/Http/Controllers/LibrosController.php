@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Libro;
 use App\Http\Requests\LibroRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class LibrosController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware(
-            'auth', [
-                'except' => [
-                    'index',
-                    'show',
-                ]
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
             ]
-        );
+        ]);
+
+        $this->middleware('role:libros.index,admin', [
+            'except' => [
+                'index',
+                'show',
+            ]
+        ]);
     }
 
     /**
@@ -36,7 +43,11 @@ class LibrosController extends Controller
      * Muestra el form de insertar
      * @return response
      */
-    public function create(){
+    public function create(Request $request)
+    {
+
+        //$request->user()->authorizeRoles(['admin']);
+
         return view('Libros.create');
     }
 
@@ -46,6 +57,8 @@ class LibrosController extends Controller
      * @return response
      */
     public function store(LibroRequest $request){
+
+        //$request->user()->authorizeRoles(['admin']);
 
         $data = $request->validated();
 
@@ -85,6 +98,7 @@ class LibrosController extends Controller
      */
 
     public function show(Libro $libro){
+
         return view('libros.show', [
             'libro' => $libro
         ]);
@@ -95,7 +109,10 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function edit(Libro $libro){
+    public function edit(Request $request, Libro $libro){
+
+        //$request->user()->authorizeRoles(['admin']);
+
         return view('libros.edit', [
             'libro' => $libro
         ]);
@@ -108,6 +125,9 @@ class LibrosController extends Controller
      */
 
     public function update(LibroRequest $request, Libro $libro){
+
+        //$request->user()->authorizeRoles(['admin']);
+
         $data = $request->validated();
 
         $portada = $libro->portada;
@@ -137,8 +157,10 @@ class LibrosController extends Controller
      * @return response
      */
 
-    public function destroy(Libro $libro)
+    public function destroy(Request $request, Libro $libro)
     {
+        //$request->user()->authorizeRoles(['admin']);
+
         if($libro->delete()){
             return response()->json(['error' => false],202);    
         }
